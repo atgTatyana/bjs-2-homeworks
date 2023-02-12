@@ -84,19 +84,13 @@ class Library {
 
 	findBookBy(type, value) {
 		let findResult = this.books.find(book => book[type] === value);
-		if (findResult === undefined) {
-			return null;
-		}
-		return findResult;
+		return findResult || null;
 	}
 
 	giveBookByName(bookName) {
-		let index = this.books.findIndex(book => book.name === bookName);
-		if (index === -1) {
-			return null;
-		}
-		// splice возвращает массив с удаленными элементами
-		return this.books.splice(index, 1)[0];
+		const findResult = this.books.find(book => book.name === bookName);
+		this.books = this.books.filter(book => book.name !== bookName);
+		return findResult || null;
 	}
 }
 
